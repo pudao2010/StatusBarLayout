@@ -5,18 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.jaeger.library.StatusBarUtil;
-import com.jaeger.statusbardemo.R;
+import com.support.android.designlibdemo.R;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Jaeger on 16/8/11.
  *
- * Email: chjie.jaeger@gmail.com
- * GitHub: https://github.com/laobie
  */
 public class UseInFragmentActivity extends BaseActivity {
     private ViewPager mVpHome;

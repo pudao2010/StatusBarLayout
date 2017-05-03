@@ -29,6 +29,7 @@ public class MainFrameActivity extends BaseActivity {
     private Button mBtnSetForImageView;
     private Button mBtnUseInFragment;
     private Button mBtnSetColorForSwipeBack;
+    private Button mBtnDynamic;
 
     private ViewGroup contentLayout;
     private SeekBar mSbChangeAlpha;
@@ -52,6 +53,7 @@ public class MainFrameActivity extends BaseActivity {
         mBtnSetForImageView = (Button) findViewById(R.id.btn_set_for_image_view);
         mBtnUseInFragment = (Button) findViewById(R.id.btn_use_in_fragment);
         mBtnSetColorForSwipeBack = (Button) findViewById(R.id.btn_set_color_for_swipe_back);
+        mBtnDynamic = (Button) findViewById(R.id.btn_my_dynamic);
         mSbChangeAlpha = (SeekBar) findViewById(R.id.sb_change_alpha);
         mTvStatusAlpha = (TextView) findViewById(R.id.tv_status_alpha);
         setSupportActionBar(mToolbar);
@@ -108,6 +110,13 @@ public class MainFrameActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainFrameActivity.this, SwipeBackActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        mBtnDynamic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainFrameActivity.this, MyDynamicActivity.class));
             }
         });
 

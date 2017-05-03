@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_need_offset"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -14,6 +15,7 @@
         android:src="@drawable/bg_monkey_king" />
 
     <android.support.v7.widget.Toolbar
+        android:layout_marginTop="50px"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -32,6 +34,8 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
+        android:padding="10dp"
+        android:text="5条消息"
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

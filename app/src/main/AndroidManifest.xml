@@ -25,7 +25,11 @@
         android:theme="@style/Theme.DesignDemo">
 
         <activity android:name=".MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".CheeseDetailActivity"
@@ -36,16 +40,13 @@
 
         <activity android:name=".statusbar.ColorStatusBarActivity"/>
         <activity android:name=".statusbar.MainFrameActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".statusbar.ImageViewActivity"/>
         <activity android:name=".statusbar.SwipeBackActivity"/>
         <activity android:name=".statusbar.UseInFragmentActivity"/>
         <activity android:name=".statusbar.ImageStatusBarActivity"/>
+        <activity android:name=".statusbar.MyDynamicActivity"/>
     </application>
 
 </manifest>

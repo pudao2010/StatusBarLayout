@@ -18,10 +18,11 @@ package com.support.android.designlibdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +30,18 @@ import com.bumptech.glide.Glide;
 public class CheeseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
+    private static final String TAG = "CheeseDetailActivity";
 
+    private AppBarLayout mAppBarLayout;
+
+    private CollapsingToolbarLayoutState state;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+
+    private enum CollapsingToolbarLayoutState {
+        EXPANDED,
+        COLLAPSED,
+        INTERNEDIATE
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +49,45 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);
-
+        Log.e(TAG, cheeseName);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+//        title = (TextView) findViewById(R.id.title);
+        collapsingToolbarLayout.setTitle(cheeseName);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset == 0) {
+                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                        state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
+//                        collapsingToolbarLayout.setTitle("EXPANDED");//设置title为EXPANDED
+                        collapsingToolbarLayout.setTitle("");//设置title为EXPANDED
+                    }
+                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                    if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                        collapsingToolbarLayout.setTitle("我的");//设置title不显示
+//                        playButton.setVisibility(View.VISIBLE);//隐藏播放按钮
+//                        title.setVisibility(View.VISIBLE);
+                        state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
+                    }
+                } else {
+                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                        if(state == CollapsingToolbarLayoutState.COLLAPSED){
+//                            playButton.setVisibility(View.GONE);//由折叠变为中间状态时隐藏播放按钮
+//                            title.setVisibility(View.GONE);
+                        }
+//                        collapsingToolbarLayout.setTitle("INTERNEDIATE");//设置title为INTERNEDIATE
+                        collapsingToolbarLayout.setTitle("");//设置title为INTERNEDIATE
+                        state = CollapsingToolbarLayoutState.INTERNEDIATE;//修改状态标记为中间
+                    }
+                }
+            }
+        });
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(cheeseName);
+
 
         loadBackdrop();
     }
@@ -57,9 +100,9 @@ public class CheeseDetailActivity extends AppCompatActivity {
                 .into(imageView);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sample_actions, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.sample_actions, menu);
+//        return true;
+//    }
 }
